@@ -1,335 +1,136 @@
-import tkinter
 from tkinter import *
-from tkinter import messagebox
 
-# setting up the tkinter window
-root = tkinter.Tk()
-root.geometry("250x400+300+300")
-root.resizable(0,0)
-root.title("Calculator")
+root = Tk()
+class Calculator:
+    def click_button(self,numbers):
+        global operator
+        global var
+        self.operator = self.operator + str(numbers)
+        self.var.set(self.operator)
 
-val = ""
-A = 0
-operator = ""
+    def clear(self):
+        self.entry.delete(0,END)
+        self.operator =""
 
-# function for numerical button clicked
+    def evaluate(self):
+        self.answer =eval(self.entry.get())
+        self.var.set(self.answer)
+        self.operator = str(self.answer)
 
-def btn_1_isclicked():
-    global val
-    val = val + "1"
-    data.set(val)
+    def __init__(self,master):
 
-def btn_2_isclicked():
-    global val
-    val = val + "2"
-    data.set(val)
-
-def btn_3_isclicked():
-    global val
-    val = val + "3"
-    data.set(val)
-
-def btn_4_isclicked():
-    global val
-    val = val + "4"
-    data.set(val)
-
-def btn_5_isclicked():
-    global val
-    val = val + "5"
-    data.set(val)
-
-def btn_6_isclicked():
-    global val
-    val = val + "6"
-    data.set(val)
-
-def btn_7_isclicked():
-    global val
-    val = val + "7"
-    data.set(val)
-
-def btn_8_isclicked():
-    global val
-    val = val + "8"
-    data.set(val)
-
-def btn_9_isclicked():
-    global val
-    val = val + "9"
-    data.set(val)
-
-def btn_0_isclicked():
-    global val
-    val = val + "0"
-    data.set(val)
+        self.operator = ""
+        self.var = StringVar()
+        frame_s = Frame(master, height=400, width=45 )
+        frame_s.pack(side=TOP, fill=BOTH, expand=True)
+        self.entry = Entry(frame_s,textvariable=self.var,bg='grey',width=45,bd=20,insertwidth=4,justify='right',font=('arial',10,'bold'))
+        self.entry.pack()
+        self.t = Text(self.entry,height=40)
 
 
-# functions for the operator button click
-def btn_plus_clicked():
-    global A
-    global operator,val
-    A = int(val)
-    operator = "+"
-    val = val + "+"
-    data.set(val)
 
-def btn_minus_clicked():
-    global A
-    global operator,val
-    A = int(val)
-    operator = "-"
-    val = val + "-"
-    data.set(val)
+        label_key = Label(root, height=15, width=30,bd=10,bg='gray50')
+        label_key.pack(side=LEFT, fill=BOTH, expand=True)
 
-def btn_mult_clicked():
-    global A
-    global operator,val
-    A = int(val)
-    operator = "*"
-    val = val + "*"
-    data.set(val)
+        label_fkey = Label(root, height=15, width=15, bg='gray25')
+        label_fkey.pack(fill=BOTH, expand=True)
+#---------------------------------------------first Row...-------------------------------------------------------------------------------------------
+        label_7 = Label(label_key, bg='black')
+        label_7.grid(row=0, column=0)
+        button_7 = Button(label_7, text='7', font=('Helvetica', '16'),command= lambda : self.click_button(7),bg='black',fg='cyan')
+        button_7.pack()
 
-def btn_div_clicked():
-    global A
-    global operator,val
-    A = int(val)
-    operator = "/"
-    val = val + "/"
-    data.set(val)
+        label_8 = Label(label_key, bg='black')
+        label_8.grid(row=0, column=1, padx=20)
+        button_8 = Button(label_8, text='8', font=('Helvetica', '16'),command= lambda: self.click_button(8),bg='black',fg='cyan')
+        button_8.pack()
 
-def btn_c_pressed():
-    global A,operator,val
-    val = ""
-    A = 0
-    operator = ""
-    data.set(val)
+        label_9 = Label(label_key, bg='black')
+        label_9.grid(row=0, column=2, padx=10)
+        button_9 = Button(label_9, text='9', font=('Helvetica', '16'),command= lambda: self.click_button(9),bg='black',fg='cyan')
+        button_9.pack()
+#-------------------------------------------------Second row...----------------------------------------------------------------------------------------
+        label_4 = Label(label_key, bg='black')
+        label_4.grid(row=1, column=0, padx=10, pady=10)
+        button_4 = Button(label_4, text='4', font=('Helvetica', '16'),command= lambda: self.click_button(4),bg='black',fg='cyan')
+        button_4.pack()
 
+        label_5 = Label(label_key, bg='black')
+        label_5.grid(row=1, column=1, padx=10, pady=10)
+        button_5 = Button(label_5, text='5', font=('Helvetica', '16'),command= lambda: self.click_button(5),bg='black',fg='cyan')
+        button_5.pack()
 
-# function to find the result
-def result():
-    global A,operator,val
-    val2 = val
-    if operator == "+":
-        x = int((val2.split("+")[1]))
-        C = A + x
-        val = str(C)
-        data.set(val)
-    if operator == "-":
-        x = int((val2.split("-")[1]))
-        C = A - x
-        val = str(C)
-        data.set(val)
-    if operator == "*":
-        x = int((val2.split("*")[1]))
-        C = A * x
-        val = str(C)
-        data.set(val)
-    if operator == "/":
-        x = int((val2.split("/")[1]))
-        if x == 0:
-            messagebox.showerror("Error", "Division By 0 Not Supported")
-            A = ""
-            val = ""
-            data.set(val)
-        else:
-            C = int(A / x)
-            data.set(C)
+        label_6 = Label(label_key, bg='black')
+        label_6.grid(row=1, column=2, padx=10, pady=10)
+        button_6 = Button(label_6, text='6', font=('Helvetica', '16'),command= lambda: self.click_button(6),bg='black',fg='cyan')
+        button_6.pack()
+#------------------------------------------------Third Row...--------------------------------------------------------------------------------------------
+        label_1 = Label(label_key, bg='black')
+        label_1.grid(row=2, column=0, padx=10)
+        button_1 = Button(label_1, text='1', font=('Helvetica', '16'),command= lambda: self.click_button(1),bg='black',fg='cyan')
+        button_1.pack()
 
+        label_2 = Label(label_key, bg='black')
+        label_2.grid(row=2, column=1, padx=10)
+        button_2 = Button(label_2, text='2', font=('Helvetica', '16'),command= lambda: self.click_button(2),bg='black',fg='cyan')
+        button_2.pack()
 
-# the label that shows the result
-data = StringVar()
-lbl = Label(
-    root,
-    text = "Label",
-    anchor = SE,
-    font = ("caliberi", 20),
-    textvariable = data,
-    background = "#ffffff",
-    fg = "#000000",
-)
-lbl.pack(expand = True, fill = "both")
+        label_3 = Label(label_key, bg='black')
+        label_3.grid(row=2, column=2, padx=10)
+        button_3 = Button(label_3, text='3', font=('Helvetica', '16'),command= lambda: self.click_button(3),bg='black',fg='cyan')
+        button_3.pack()
+#-------------------------------------------------Fourth Row...-------------------------------------------------------------------------------------------
+        label_0 = Label(label_key, bg='black')
+        label_0.grid(row=3, column=0, padx=10, pady=10)
+        button_0 = Button(label_0, text='0', font=('Helvetica', '16'),command= lambda: self.click_button(0),bg='black',fg='cyan')
+        button_0.pack()
 
-# the frames section
-btnrow1 = Frame(root)
-btnrow1.pack(expand = True, fill = "both")
+        label_deci = Label(label_key, bg='black')
+        label_deci.grid(row=3, column=1, padx=10, pady=10)
+        button_deci = Button(label_deci, text='.', font=('Helvetica', '16'),command= lambda: self.click_button('.'),bg='black',fg='cyan')
+        button_deci.pack()
 
-btnrow2 = Frame(root)
-btnrow2.pack(expand = True, fill = "both")
+        label_equal = Label(label_key, bg='black')
+        label_equal.grid(row=3, column=2, padx=10, pady=10)
+        button_equal = Button(label_equal, text='=', font=('Helvetica', '16'),command= self.evaluate,bg='black',fg='cyan')
+        button_equal.pack()
+#------------------------------------------------All the Operators....---------------------------------------------------------------------------------------
+        label_C = Label(label_fkey, bg='black')
+        label_C.grid(row=0, column=0,columnspan=2)
+        button_C = Button(label_C, text='C', font=('Helvetica', '16'), height=1, width=10,command=  self.clear,bg='black',fg='cyan')
+        button_C.pack(side=LEFT)
 
-btnrow3 = Frame(root)
-btnrow3.pack(expand = True, fill = "both")
+        label_sub = Label(label_fkey, bg='black')
+        label_sub.grid(row=1, column=0, sticky=W, pady=10)
+        button_sub = Button(label_sub, text='-', font=('Helvetica', '16'), height=1, width=3,command= lambda: self.click_button('-'),bg='black',fg='cyan')
+        button_sub.pack(side=LEFT)
 
-btnrow4 = Frame(root)
-btnrow4.pack(expand = True, fill = "both")
+        label_mul = Label(label_fkey, bg='black')
+        label_mul.grid(row=1, column=1, sticky=E)
+        button_mul = Button(label_mul, text='x', font=('Helvetica', '16'), height=1, width=3,command= lambda: self.click_button('*'),bg='black',fg='cyan')
+        button_mul.pack()
 
+        label_div = Label(label_fkey, bg='black')
+        label_div.grid(row=2, column=0, sticky=W)
+        button_div = Button(label_div, text='/', font=('Helvetica', '16'), height=1, width=3,command= lambda: self.click_button('/'),bg='black',fg='cyan')
+        button_div.pack()
 
-# The buttons section
-btn1 = Button(
-    btnrow1,
-    text = "1",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_1_isclicked,
-)
-btn1.pack(side = LEFT, expand = True, fill = "both",)
+        label_add = Label(label_fkey, bg='black')
+        label_add.grid(row=2, column=1, sticky=E)
+        button_add = Button(label_add, text='+', font=('Helvetica', '16'), height=1, width=3,command= lambda: self.click_button('+'),bg='black',fg='cyan')
+        button_add.pack()
 
-btn2 = Button(
-    btnrow1,
-    text = "2",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_2_isclicked,
-)
-btn2.pack(side = LEFT, expand = True, fill = "both",)
+        label_lbrace = Label(label_fkey, bg='black')
+        label_lbrace.grid(row=3,column=0,sticky=W,pady=10)
+        button_lbrace = Button(label_lbrace,text='(', font=('Helvetica', '16'), height=1, width=3,command= lambda: self.click_button('('),bg='black',fg='cyan')
+        button_lbrace.pack()
 
-btn3 = Button(
-    btnrow1,
-    text = "3",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_3_isclicked,
-)
-btn3.pack(side = LEFT, expand = True, fill = "both",)
-
-btnplus = Button(
-    btnrow1,
-    text = "+",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_plus_clicked,
-)
-btnplus.pack(side = LEFT, expand = True, fill = "both",)
-
-# buttons for frame 2
-
-btn4 = Button(
-    btnrow2,
-    text = "4",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_4_isclicked,
-)
-btn4.pack(side = LEFT, expand = True, fill = "both",)
-
-btn5 = Button(
-    btnrow2,
-    text = "5",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_5_isclicked,
-)
-btn5.pack(side = LEFT, expand = True, fill = "both",)
-
-btn6 = Button(
-    btnrow2,
-    text = "6",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_6_isclicked,
-)
-btn6.pack(side = LEFT, expand = True, fill = "both",)
-
-btnminus = Button(
-    btnrow2,
-    text = "-",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_minus_clicked,
-)
-btnminus.pack(side = LEFT, expand = True, fill = "both",)
-
-# button for frame 3
-
-btn7 = Button(
-    btnrow3,
-    text = "7",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_7_isclicked,
-)
-btn7.pack(side = LEFT, expand = True, fill = "both",)
-
-btn8 = Button(
-    btnrow3,
-    text = "8",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_8_isclicked,
-)
-btn8.pack(side = LEFT, expand = True, fill = "both",)
-
-btn9 = Button(
-    btnrow3,
-    text = "9",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_9_isclicked,
-)
-btn9.pack(side = LEFT, expand = True, fill = "both",)
-
-btnmult = Button(
-    btnrow3,
-    text = "*",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_mult_clicked,
-)
-btnmult.pack(side = LEFT, expand = True, fill = "both",)
-
-# button for frame4
-
-
-btnc = Button(
-    btnrow4,
-    text = "C",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_c_pressed,
-)
-btnc.pack(side = LEFT, expand = True, fill = "both",)
-
-btn0 = Button(
-    btnrow4,
-    text = "0",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_0_isclicked,
-)
-btn0.pack(side = LEFT, expand = True, fill = "both",)
-
-btnequal = Button(
-    btnrow4,
-    text = "=",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = result,
-)
-btnequal.pack(side = LEFT, expand = True, fill = "both",)
-
-btndiv = Button(
-    btnrow4,
-    text = "/",
-    font = ("caliberi", 22),
-    relief = GROOVE,
-    border = 0,
-    command = btn_div_clicked,
-)
-btndiv.pack(side = LEFT, expand = True, fill = "both",)
-
+        label_rbrace = Label(label_fkey, bg='black')
+        label_rbrace.grid(row=3, column=1, sticky=E, pady=10)
+        button_rbrace = Button(label_rbrace, text=')', font=('Helvetica', '16'), height=1, width=3,
+                               command=lambda: self.click_button(')'),bg='black',fg='cyan')
+        button_rbrace.pack()
+#---------------------------------------All Completed Over Here...-----------------------------------------------------------------------------------------------
+c = Calculator(root)
+root.title("Prasanta\'s Calculator")
 root.mainloop()
