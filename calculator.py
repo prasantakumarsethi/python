@@ -95,7 +95,7 @@ class Calculator:
         button_equal = Button(label_equal, text='=', font=('Helvetica', '16'),command= self.evaluate,bg='black',fg='cyan')
         button_equal.pack()
 #------------------------------------------------All the Operators....---------------------------------------------------------------------------------------
-        label_C = Label(label_fkey, bg='black')
+        label_C = Label(label_fkey, bg='blue')
         label_C.grid(row=0, column=0,columnspan=2)
         button_C = Button(label_C, text='C', font=('Helvetica', '16'), height=1, width=10,command=  self.clear,bg='black',fg='cyan')
         button_C.pack(side=LEFT)

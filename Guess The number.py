@@ -11,8 +11,8 @@ while i<=n:
     if(x<guess):
         print("Wrong choice! Please enter smaller number")
         print(f"you have remaining {n-i} chance out of {n} chances\n")
-        i +=1
 
+        i +=1
     elif(x>guess):
         print("Wrong choice!Please enter greater number")
         print(f"you have remaining { n - i} chance out of {n} chances\n")
